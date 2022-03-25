@@ -1,11 +1,14 @@
 package com.elhardoum.identifyperson;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -19,6 +22,13 @@ public class MainActivity extends AppCompatActivity {
     static class Person {
         protected String name;
         protected Integer img;
+
+        /**
+          * A person object with their name and photo
+          *
+          * @param name name of person
+          * @param img resource id for their image file
+          */
         Person(String name, Integer img)
         {
             this.name = name;
@@ -48,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
     protected int score = 0;
 
+    /**
+      * on activity creation
+      *
+      */
     @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +133,31 @@ public class MainActivity extends AppCompatActivity {
         reloadQuizUi();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if (item.getItemId() == R.id.action_about) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("About App");
+            builder.setMessage(R.string.about_text);
+            builder.setPositiveButton("OK", null);
+            builder.create().show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+      * refresh the quiz UI to show active person image and options
+      *
+      */
     @SuppressLint("DefaultLocale")
     protected void reloadQuizUi()
     {

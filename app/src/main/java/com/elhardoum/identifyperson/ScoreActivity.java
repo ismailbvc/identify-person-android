@@ -11,6 +11,12 @@ import java.util.Objects;
 
 public class ScoreActivity extends AppCompatActivity {
 
+    /**
+     * on activity creation
+     *
+     * @param savedInstanceState
+     * @return void
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
